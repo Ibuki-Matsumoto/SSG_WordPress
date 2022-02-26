@@ -1,0 +1,12 @@
+version: "3"
+services:
+  nextjs:
+    build: ./docker/
+    container_name: nextjs_container
+    ports:
+      - "3030:3000"
+      # ポート番号のバインド部分、左辺の番号は任意の番号に変更可能
+    tty: true
+    volumes:
+      - ./Front:/local/src
+      # ローカルとコンテナ内のディレクトリを関連付けてます。今回だとFrontディレクトリとコンテナ内の/local/srcを連携しています。

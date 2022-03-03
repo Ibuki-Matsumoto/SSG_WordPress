@@ -1,22 +1,11 @@
-## 使い方
-[dockerをインストール](https://www.docker.com/)
+## 必須コマンド
 
-諸々設定が終わったら、当リポジトリをcloneし
-[docker-compose.yml](./docker-compose.yml)の`ports`部分以下コメントを読み、適時編集してください。
+`docker-compoe up -d` -> コンテナをバックグラウンド上で起動する為のコマンド。詳しくは書かないが基本的に新しく作成する際はこちらのコマンドを利用する。
 
-clone先のrootディレクトリで
-`docker-compose up -d --build` と入力
-以降、作業が終わるまで常にコンテナは起動しっぱなしです。
+`docker-compose exec nextjs sh` -> 起動したnextjsコンテナに入る為のコマンド。起動は`ash`で行う、bashは入ってないので起動できない
 
-コンテナの起動が完了したら
-`docker-compose exec nextjs sh` と入力することで起動したコンテナに入ることが出来ます。
-
-コンテナに入ったらまずはユーザーを変更
-`su node`
-
-サーバーを起動します。
-`yarn dev`
-
-起動後、ターミナルにてURLが表示されますがポート部分を上記で変更した値に書き換えてください。
-
-コンテナに入った時点でのディレクトリは `/local/src` のはずなので、後は通常通り `Front` ディレクトリ内で編集が出来ます。
+`yarn`
+- yarn dev
+    - 開発サーバー起動用コマンド。コンテナ内のssg_mediaディレクトリにて行うことでlocalhost上にサーバーを起動できる。php artisan serveのようなもの。
+- yarn add ライブラリ名
+    - composer installのようなもの。

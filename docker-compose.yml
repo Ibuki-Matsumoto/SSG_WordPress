@@ -10,3 +10,5 @@ services:
     volumes:
       - ./Front:/local/src
       # ローカルとコンテナ内のディレクトリを関連付けてます。今回だとFrontディレクトリとコンテナ内の/local/srcを連携しています。
+    environment:
+      - CHOKIDAR_USEPOLLING=true

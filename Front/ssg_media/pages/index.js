@@ -11,7 +11,25 @@ import { Header } from "../src/components/Header";
 
 export default function Home({ posts }) {
 
-    console.log(posts)
+    // const articletags = [...posts].map(post => {
+
+    //     // 記事ごとに配列でまとめる
+    //     let post_tags = [];
+
+    //     // 配列なのでforeachでぐるぐる
+    //     post.tags.edges.forEach(edge => {
+
+    //         // タグがundefinedじゃなければ記事タグ配列に追加
+    //         if (edge.node.name != undefined) {
+    //             post_tags.push(edge.node.name);
+    //         }
+    //     });
+
+    //     // 配列を返す
+    //     return post_tags
+    // });
+
+    // console.log(articletags)
 
     return (
         <div className="w-full">
@@ -21,12 +39,25 @@ export default function Home({ posts }) {
                     <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">最新記事</h2>
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3  gap-4 md:gap-6 lg:gap-8">
-                    {posts.map(post => {
+                    {[...posts].map(post => {
+                        // 記事ごとに配列でまとめる
+                        let post_tags = [];
+
+                        // 配列なのでforeachでぐるぐる
+                        post.tags.edges.forEach(edge => {
+
+                            // タグがundefinedじゃなければ記事タグ配列に追加
+                            if (edge.node.name != undefined) {
+                                post_tags.push(edge.node.name);
+                            }
+                        });
                         return (
                             <Card
                                 title={post.title}
                                 excerpt={post.excerpt}
                                 imgsrc={post.featuredImage.node.sourceUrl}
+                                tags={post_tags}
+                                link={String(post.postId)}
                             />
                         )
                     })}
@@ -41,20 +72,28 @@ export async function getStaticProps() {
     const res = await client.query({
         query: gql`
         query MyQuery {
-            posts {
+            posts(first: 3) {
                 edges {
+                node {
+                    title(format: RENDERED)
+                    excerpt(format: RENDERED)
+                    featuredImage {
                     node {
-                        title(format: RENDERED)
-                        excerpt(format: RENDERED)
-                        featuredImage {
-                            node {
-                                sourceUrl
-                            }
+                        sourceUrl
                     }
+                    }
+                    tags {
+                        edges {
+                            node {
+                                name
+                            }
+                        }
+                    }
+                    postId
+                }
                 }
             }
         }
-}
         `
     });
 

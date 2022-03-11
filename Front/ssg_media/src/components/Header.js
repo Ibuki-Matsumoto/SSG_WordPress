@@ -2,13 +2,10 @@ import Link from "next/link"
 
 export const Header = () => {
     return (
-        <div className="bg-gray-800 py-3 flex justify-between items-center">
-            <p className="text-white text-2xl leading-6 w-60 ml-5">NextBlog</p>
-            <div>
-                <Link href="/">
-                    <a className="text-white mr-5">Top</a>
-                </Link>
-            </div>
+        <div className="bg-white py-4">
+            <Link href="/" passHref>
+                <a className="text-gray-800 text-3xl pl-5 tracking-wide">NextBlog</a>
+            </Link>
         </div>
     )
 }

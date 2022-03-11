@@ -1,16 +1,47 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* 記事ページのスタイル全般 */
+.inner_contents {
+  @apply w-full;
+  @apply text-base;
+  /* @apply tracking-wider; */
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.inner_contents p {
+  @apply leading-8;
 }
 
-* {
-  box-sizing: border-box;
+/* h2のスタイル */
+.inner_contents h2 {
+  @apply w-full;
+  @apply bg-gray-100;
+  @apply text-2xl;
+  @apply font-bold;
+  @apply py-2;
+  @apply pl-2;
+  @apply my-5;
+}
+
+/* h3のスタイル */
+.inner_contents h3 {
+  @apply text-xl;
+  @apply border-l-4;
+  @apply border-gray-800;
+  @apply bg-gray-100;
+  @apply py-2;
+  @apply pl-3;
+  @apply my-5;
+}
+
+/* WordPress側で背景灰色を利用した際に付与されるクラス */
+.inner_contents .haiiro {
+    padding: 0.2em 0.3em;
+    margin: 0 0.1em;
+    border-radius: 5px;
+    background: #f1f2f3;
+    color: #404040;
+    font-size: 0.9em;
 }

@@ -54,7 +54,6 @@ export default function Home({ posts }) {
                         return (
                             <Card
                                 title={post.title}
-                                excerpt={post.excerpt}
                                 imgsrc={post.featuredImage.node.sourceUrl}
                                 tags={post_tags}
                                 link={String(post.postId)}
@@ -76,7 +75,6 @@ export async function getStaticProps() {
                 edges {
                 node {
                     title(format: RENDERED)
-                    excerpt(format: RENDERED)
                     featuredImage {
                     node {
                         sourceUrl

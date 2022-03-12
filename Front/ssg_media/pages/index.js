@@ -71,7 +71,7 @@ export async function getStaticProps() {
     const res = await client.query({
         query: gql`
         query MyQuery {
-            posts(first: 3) {
+            posts(first: 3, where: {status: PUBLISH}) {
                 edges {
                 node {
                     title(format: RENDERED)

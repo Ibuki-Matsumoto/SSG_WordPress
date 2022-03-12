@@ -6,12 +6,16 @@ import { Header } from "../src/components/Header";
 import { GrUpdate } from "react-icons/gr";
 import Image from 'next/image'
 
+import { TwitterShareButton, TwitterIcon } from 'react-share';
+
 export default function Post({ post }) {
-    console.log(post)
     return (
         <div className="bg-gray-100">
             <Header />
             {[...post].map(ps => {
+
+                let inner_content = ps.content;
+
                 return (
                     <div className="tracking-wide w-7/12 mt-10 ml-60">
                         <div className="bg-white px-10">
@@ -32,9 +36,12 @@ export default function Post({ post }) {
                             <div
                                 className="inner_contents"
                                 dangerouslySetInnerHTML={{
-                                    __html: `${ps.content}`,
+                                    __html: `${inner_content}`,
                                 }}
                             />
+                            {/* <TwitterShareButton url={`localhost:3000/${ps.postId}`} title={ps.title}>
+                                <TwitterIcon size={32} round={true} />
+                            </TwitterShareButton> */}
                         </div>
                     </div>
                 )
@@ -83,6 +90,7 @@ export async function getStaticProps({ params }) {
                     node {
                         title(format: RENDERED)
                         content(format: RENDERED)
+                        postId
                         modified
                         featuredImage {
                             node {
